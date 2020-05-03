@@ -1,0 +1,52 @@
+﻿@model Timecard.vm.UserVM
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<h2>Edit</h2>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<link href="~/Styles/StyleSheetUI.css" rel="stylesheet" />
+
+<script>
+    $(document).ready(function () {
+
+        $("#btnpasswordchnge").click(function () {
+            $("form").attr("action", "/EditUser/Edit");
+        });
+
+        $("#cancel").click(function () {
+            $("form").attr("action", "/EditUser/Back");
+        });
+
+    });
+</script>
+
+@using (Html.BeginForm("Edit", "EditUser", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>@Html.Label("Password : ")</td>
+            <td>@Html.PasswordFor(x => x.Password)</td>
+        </tr>
+        <tr>
+            <td>@Html.ValidationMessageFor(x => x.Password)</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Confirm Password : ")</td>
+            <td>@Html.PasswordFor(x => x.ConfirmPassword)</td>
+        </tr>
+        <tr>
+            <td>@Html.ValidationMessageFor(x => x.ConfirmPassword)</td>
+        </tr>
+        <tr>
+            <td><input type="submit" name="btnpasswordchnge" id="btnpasswordchnge" value="RESET PASSWORD" /></td>
+            <td><input type="reset" name="btnclear" id="btnclear" value="CLEAR" /></td>
+            @*<td><input type="submit" name="btnback" id="btnback" value="BACK" formnovalidate="formnovalidate"/></td>*@
+        </tr>
+    </table>
+}
+@ViewBag.Message
